@@ -1,0 +1,306 @@
+/*for performance reasons, you should really only animate two properties*/
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-20rem); }
+  100% {
+    opacity: 1;
+    transform: translate(0px); } }
+
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(20rem); }
+  100% {
+    opacity: 1;
+    transform: translate(0px); } }
+
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(3rem); }
+  100% {
+    opacity: 1;
+    transform: translate(0px); } }
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  /*Everything will inherit from body the box sizing property*/ }
+
+html {
+  font-size: 62.5%;
+  /*62.5% of default (16px) is 10px. one REM === 10px*/ }
+
+body {
+  font-family: "Lato", sans-serif;
+  /* Should always specify this in the body and not in
+        the universal selector*/
+  font-weight: 16px;
+  line-height: 1.7;
+  color: #777;
+  padding: 3rem;
+  box-sizing: border-box;
+  /*Change box model so the border and padding are not
+        added to the total width/height specified for the box
+        but rather calculated into the box w/out changing its
+        width/height*/ }
+
+.primary_heading {
+  color: #fff;
+  text-transform: uppercase;
+  margin-bottom: 5rem;
+  backface-visibility: hidden;
+  /*
+     The backface-visibility property defines whether or 
+     not the back face of an element should be visible when
+     facing the user. The back face of an element is a 
+     mirror image of the front face being displayed. This 
+     property is useful when an element is rotated. It lets 
+     you choose if the user should see the back face or not.
+     */ }
+  .primary_heading_main {
+    display: block;
+    font-size: 6rem;
+    font-weight: 700;
+    letter-spacing: 3rem;
+    animation-name: moveInLeft;
+    animation-duration: 1.5s;
+    animation-delay: .2s; }
+  .primary_heading_sub {
+    display: block;
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: 1.5rem;
+    animation-name: moveInRight;
+    animation-duration: 1.5s;
+    /*short hand for animation is transition*/
+    /*all refers to ALL the properties above.
+        IE. Could be padding, margin, height, etc
+        transition: all 1.5s ease .1s; */
+    /*animation: name duration timing-function delay iteration-count direction fill-mode;*/ }
+
+.secondary_heading {
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: inline-block;
+  background-image: linear-gradient(to right, #7ed56f, #55c57a);
+  -webkit-background-clip: text;
+  color: transparent;
+  letter-spacing: .2px; }
+
+.tertiary_heading {
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-transform: uppercase; }
+
+.paragraph {
+  font-size: 1.6rem; }
+  .paragraph:not(:last-child) {
+    margin-bottom: 3rem; }
+
+.utility_center_text {
+  text-align: center; }
+
+.utility_margin_bottom_small {
+  margin-bottom: 1.5rem; }
+
+.utility_margin_bottom_medium {
+  margin-bottom: 4rem; }
+
+.utility_margin_bottom_big {
+  margin-bottom: 8rem; }
+
+.button {
+  /*pseudo classes are a special state of a selector*/
+  /*we want the link/button to have same design as 
+    when the link has been visited*/
+  /*when clicked on*/
+  /*
+    1. The pseudo element adds a virtual element right 
+    after the one that we are selecting.
+    2. For the content to appear on the page, you must specify
+    its content property. It can be an empty element, but
+    it is ALWAYS necessary. Same with the display property.
+    3. The pseudo class also acts like a child element, so when
+    using width: 100% it will fill it's parent, aka the original 
+    element thta is being duplicated.
+
+    we used absolute positioning on the botton, so this would take 
+    the child element out of its parents scope and go to the next 
+    element that has a position of relative. So we need to make sure 
+    that the pseudo element remains inside its parent by giving the 
+    parent a relative positioning
+    */ }
+  .button:link, .button:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.2rem 3.4rem;
+    display: inline-block;
+    border-radius: 100px;
+    position: relative;
+    box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.12), 0 0.1rem 0.2rem rgba(0, 0, 0, 0.24);
+    font-size: 1.6rem; }
+  .button:hover {
+    transform: translateY(-0.3rem);
+    box-shadow: 0 1rem 2rem;
+    /*first argument is X offset, second is Y offset, third is blur*/
+    box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.404), 0 0.1rem 0.2rem rgba(0, 0, 0, 0.24); }
+    .button:hover::after {
+      transform: scaleY(1.4) scaleX(1.6);
+      opacity: 0; }
+  .button:active {
+    transform: translateY(-0.1rem);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
+  .button_white {
+    background-color: #fff;
+    color: #777; }
+    .button_white::after {
+      background-color: #fff; }
+  .button::after {
+    content: "";
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    border-radius: 10rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition-duration: .4s; }
+  .button_animated {
+    animation: moveInBottom .5s ease-out .5s;
+    animation-fill-mode: backwards;
+    /*Our element was visible before running the animation so...
+        The animation-fill-mode property specifies a style for the 
+        element when the animation is not playing (before it starts, 
+        after it ends, or both).
+        https://tympanus.net/codrops/css_reference/animation-fill-mode/*/ }
+
+.button_text {
+  padding: 1rem; }
+  .button_text:link, .button_text:visited {
+    font-size: 1.6rem;
+    color: #55c57a;
+    display: inline-block;
+    text-decoration: none;
+    border-bottom: 1px solid #55c57a;
+    padding: 1rem 2rem;
+    transition: all .2s; }
+  .button_text:hover {
+    color: #fff;
+    background-color: #55c57a;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px); }
+  .button_text:active {
+    box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.12);
+    transform: translateY(0px); }
+
+.composition {
+  position: relative; }
+  .composition_photo {
+    width: 55%;
+    box-shadow: 0 1.2rem 4rem rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    position: absolute;
+    transition: all .2s;
+    outline-offset: 2rem; }
+    .composition_photo_photo_1 {
+      top: -2rem;
+      left: 0; }
+    .composition_photo_photo_2 {
+      top: 2rem;
+      right: 0; }
+    .composition_photo_photo_3 {
+      top: 10rem;
+      left: 20%; }
+    .composition_photo:hover {
+      outline: 1.2rem solid #55c57a;
+      transform: scale(1.1) translateY(-0.5rem);
+      box-shadow: 0 2.5rem 4rem rgba(0, 0, 0, 0.5);
+      z-index: 20; }
+  .composition:hover .composition_photo:not(:hover) {
+    transform: scale(0.95);
+    filter: brightness(50%); }
+
+.row {
+  max-width: 114rem;
+  margin: 0 auto; }
+  .row:not(:last-child) {
+    margin-bottom: 8rem; }
+  .row::after {
+    content: "";
+    display: table;
+    clear: both; }
+  .row [class^="col-"] {
+    float: left; }
+    .row [class^="col-"]:not(:last-child) {
+      margin-right: 6rem; }
+  .row .col-1-of-2 {
+    width: calc((100% - 6rem) / 2); }
+  .row .col-1-of-3 {
+    width: calc((100% - 2 * 6rem) / 3); }
+  .row .col-2-of-3 {
+    width: calc((2 * (100% - 2 * 6rem) / 3) + 6rem); }
+  .row .col-1-of-4 {
+    width: calc((100% - 3 * 6rem) / 4); }
+  .row .col-2-of-4 {
+    width: calc((2 * (100% - 3 * 6rem) / 4) + 6rem); }
+  .row .col-3-of-4 {
+    width: calc((3 * (100% - 3 * 6rem) / 4) + (2 * 6rem)); }
+
+.header {
+  height: 95vh;
+  /*the box should be 95% of viewports height*/
+  background-image: linear-gradient(to right bottom, rgba(85, 197, 122, 0.8), rgba(126, 213, 111, 0.8)), url("../img/hero.jpg");
+  background-size: cover;
+  /*w.e the width of the element, you will try to fit it inside the current box*/
+  background-position: top;
+  /*always stays at the top of the box as aposed to bottom/center*/
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  /*polygon(x y, x y, x y, x y) top-left, top-right, bottom-right, bottom-left | x = horizontal y = verticle*/
+  position: relative; }
+  .header .logo_box {
+    position: absolute;
+    /*its reference point is the next parent element that has a positioning set to relative*/
+    top: 4rem;
+    left: 4rem; }
+  .header .logo {
+    height: 4rem; }
+  .header .text_box {
+    position: absolute;
+    left: 50%;
+    /*in relation to the parent element*/
+    top: 45%;
+    /*in relation to the parent element*/
+    transform: translate(-50%, -50%);
+    text-align: center; }
+
+.section_about {
+  background-color: #f7f7f7;
+  padding: 25rem 0;
+  margin-top: -20rem; }
+
+/*NOTES*/
+/*
+FLOATS
+
+Float property causes the element to be completely removed from the flow 
+and shifted to left or right as far as possible; until it reaches the edge
+of its containing box or another floated element.
+
+When this happens, text or inline elements, will wrap around the floated
+element. 
+
+When an elemented is floated, its container will NOT adjust its
+height to the element.
+
+
+Absolute positioning
+
+Is positioned to the next relative position element
+*/

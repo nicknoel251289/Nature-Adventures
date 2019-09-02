@@ -1,0 +1,30 @@
+.header {
+    height: 95vh; /*the box should be 95% of viewports height*/
+    background-image: linear-gradient(
+        to right bottom, rgba($primary_color, 0.8), 
+        rgba($secondary_color, 0.8)), 
+        url("../img/hero.jpg")
+    ;
+    background-size: cover; /*w.e the width of the element, you will try to fit it inside the current box*/
+    background-position: top; /*always stays at the top of the box as aposed to bottom/center*/
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); 
+        /*polygon(x y, x y, x y, x y) top-left, top-right, bottom-right, bottom-left | x = horizontal y = verticle*/
+    position: relative;
+
+    .logo_box {
+        position: absolute; /*its reference point is the next parent element that has a positioning set to relative*/
+        top: 4rem;
+        left: 4rem;
+    }
+    .logo {
+        height: 4rem;
+    }
+    
+    .text_box {
+        position: absolute;
+        left: 50%; /*in relation to the parent element*/
+        top: 45%; /*in relation to the parent element*/
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+}

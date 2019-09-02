@@ -1,0 +1,25 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit; 
+        /*Everything will inherit from body the box sizing property*/
+}
+html {
+    font-size: 62.5%; /*62.5% of default (16px) is 10px. one REM === 10px*/
+  }
+body {
+    font-family: "Lato", sans-serif;
+        /* Should always specify this in the body and not in
+        the universal selector*/
+    font-weight: 16px;
+    line-height: 1.7;
+    color: $light_gray;
+    padding: 3rem;
+    box-sizing: border-box; 
+        /*Change box model so the border and padding are not
+        added to the total width/height specified for the box
+        but rather calculated into the box w/out changing its
+        width/height*/
+}
