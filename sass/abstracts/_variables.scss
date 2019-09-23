@@ -1,9 +1,19 @@
 //COLORS
-$primary_color: #55c57a;
-$secondary_color: #7ed56f;
-$tertiary_color: #28b485;
+$primary_color: #33b15d;
+$secondary_color: #5aca47;
+$tertiary_color: #1da376;
+
+$light_yellow: #ffb900;
+$dark_yellow: #ff7730;
+
+$light_blue: #2998ff;
+$dark_blue: #5643fa;
+
+$red_error: #fc3535;
+
 $lighter_gray: #f7f7f7;
-$light_gray: #777;
+$gray: #e0e0e0;
+$light_gray: #999;
 $dark_gray: #222;
 $very_dark: #010101;
 $black: #000;
@@ -15,4 +25,9 @@ $default_font_size: 1.6rem;
 //GRID
 $grid_width: 114rem;
 $gutter_vertical: 8rem;
+$gutter_vertical_small: 2rem;
 $gutter_horizontal: 6rem;
+
+
+//BORDER RADIUS
+$card_radius: 6px;

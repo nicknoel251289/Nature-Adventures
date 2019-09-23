@@ -1,0 +1,92 @@
+.story {
+    width: 75%;
+    margin: 0 auto;
+    box-shadow: 0 3rem 6rem rgba($black, .1);
+    background-color: rgba($white, .8);
+    border-radius: 6px;
+    padding: 6rem 6rem 6rem 9rem;
+    font-size: $default_font_size;
+    transform: skewX(-12deg);
+
+    @include respond(tablet_portrait) {
+        width: 100%;
+        padding: 6rem 5rem 6rem 5rem;
+    }
+
+    @include respond(phone) {
+        transform: skewX(0deg);
+    }
+
+    &_shape {
+        width: 15rem;
+        height: 15rem;
+        position: relative;
+
+        //for the shape-outside property to work, the shape needs to be floated and height/width defined
+        //the shape-outside property shapes the elements outside where we are defining this property
+        float: left;
+        //first argument is radius - 50% of height and width. 2nd/3rd argument are where it should start
+        //50% from the left and 50% from the top
+        -webkit-shape-outside: circle(50% at 50% 50%);
+        shape-outside: circle(50% at 50% 50%);
+
+        //shaping the actual shape
+        -webkit-clip-path: circle(50% at 50% 50%);
+        clip-path: circle(50% at 50% 50%);
+
+        //best way to move an element that is floated is transform
+        transform: translateX(-2rem) skewX(12deg);
+
+        @include respond(tablet_portrait) {
+            width: 12rem;
+            height: 12rem;
+            margin-right: 1rem;
+        }
+
+        @include respond(phone) {
+            transform: translateX(0) skewX(0deg);
+            margin-right: 2rem;
+        }
+    }
+
+    &_image {
+        //flexible images for responsive design ALWAYS need a width
+        //we did height because the image is wider than it is taller so it cut out (try it
+        height: 100%;
+        transform: translateX(-4rem) scale(1.4);
+        transition: all .5s;
+    }
+
+    &_text {
+        transform: skewX(12deg) translateX(12px);
+
+        @include respond(phone) {
+            transform: skewX(0deg);
+        }
+    }
+
+    &_caption {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 30%);
+        color: $white;
+        text-transform: uppercase;
+        font-size: 1.7rem;
+        text-align: center;
+        opacity: 0;
+        transition: all .5s;
+        backface-visibility: hidden;
+    }
+    
+    &:hover &_caption {
+        opacity: 1;
+        transform: translate(-50%, -50%)
+    }
+
+    &:hover &_image {
+        backface-visibility: hidden;
+        transform: translateX(-4rem) scale(1);
+        filter: blur(3px) brightness(80%);
+    }
+}

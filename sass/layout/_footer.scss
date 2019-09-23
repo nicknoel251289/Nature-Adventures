@@ -1,0 +1,78 @@
+.footer {
+    background-color: $dark_gray;
+    padding: 10rem 0;
+    font-size: 1.4rem;
+
+    @include respond(tablet_portrait) {
+        padding: 8rem 0;
+    }
+
+    &_logo_box {
+        //inline elements behave just like text
+        text-align: center;
+        margin-bottom: 8rem;
+
+        @include respond(tablet_portrait) {
+            margin-bottom: 6rem;
+        }
+    }
+
+    &_logo {
+        width: 10rem;
+        height: auto;
+    }
+
+    &_navigation {
+        border-top: 1px solid $light_gray;
+        padding-top: 2rem;
+        display: inline-block; //inline-block only takes up what it needs without this it would go the full length of the container
+        
+        @include respond(tablet_portrait) {
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    &_list {
+        list-style: none;
+    }
+
+    &_item {
+        display: inline-block;
+
+        &:not(:last-child) {
+            margin-right: 1.5rem;
+        }
+    }
+
+    &_link {
+        &:link,
+        &:visited {
+            color: $lighter_gray;
+            text-decoration: none;
+            text-transform: uppercase;
+            display: inline-block;
+        }
+
+        &:hover,
+        &:active {
+            color: $primary_color;
+            box-shadow: 0 1rem 2rem rgba($black, .4);
+            transform: rotate(5deg) scale(1.2);
+        }
+    }
+
+    &_copyright {
+        color: $light_gray;
+        border-top: 1px solid $light_gray;
+        padding-top: 2rem;
+        width: 80%;
+        float: right;
+
+        @include respond(tablet_portrait) {
+            width: 100%;
+            text-align: center;
+            float: none;
+        }
+    }
+}

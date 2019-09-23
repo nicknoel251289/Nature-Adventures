@@ -6,9 +6,30 @@
     box-sizing: inherit; 
         /*Everything will inherit from body the box sizing property*/
 }
+
 html {
+
     font-size: 62.5%; /*62.5% of default (16px) is 10px. one REM === 10px*/
-  }
+
+
+    @include respond(tablet_landscape) { //max-width is 1200px
+        font-size: 56.25%; //1 rem = 9px // screen < 1200px ? then apply media queries and overright duplicates
+    }
+
+    @include respond(tablet_portrait) {
+        font-size: 50%; //1 rem = 8px   // screen < 900 ?
+    }
+
+    @include respond(phone) {
+        font-size: 43.75%; //1 rem = 7px | < 600 ?
+    }
+
+    @include respond(large_desktop) {
+        font-size: 68.75%; //1 rem = 11px
+    }
+
+}
+
 body {
     font-family: "Lato", sans-serif;
         /* Should always specify this in the body and not in
@@ -22,4 +43,8 @@ body {
         added to the total width/height specified for the box
         but rather calculated into the box w/out changing its
         width/height*/
+
+    @include respond(tablet_landscape) {
+        padding: 0;
+    }
 }

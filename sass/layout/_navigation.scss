@@ -1,0 +1,184 @@
+.navigation {
+    &_checkbox {
+        display: none;
+        visibility: hidden;
+    }
+
+    &_button {
+        background-color: $white;
+        height: 7rem;
+        width: 7rem;
+        position: fixed;
+        top: 6rem;
+        right: 6rem;
+        border-radius: 50%;
+        z-index: 2000;
+        box-shadow: 0 .5rem 1.5rem rgba($black, .2);
+        cursor: pointer;
+        text-align: center;
+
+        @include respond(tablet_portrait) {
+            top: 3rem;
+            right: 3rem;
+        }
+
+        &::after {
+            content: "";
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            transition-duration: .4s;
+            background-color: $white;
+            border-radius: 50%;
+        }
+
+        &:hover::after {
+            transform: scale(1.5);
+            opacity: 0;
+        }
+    }
+
+    &_background {
+        height: 6rem;
+        width: 6rem;
+        border-radius: 50%;
+        position: fixed;
+        top: 6.5rem;
+        right: 6.5rem;
+        background-image: radial-gradient($secondary_color, $tertiary_color);
+        z-index: 1000;
+        transition: transform .6s cubic-bezier(1,-0.38,.19,1.29);
+
+        @include respond(tablet_portrait) {
+            top: 3.5rem;
+            right: 3.5rem;
+        }
+    }
+
+    &_nav {
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: -400px;
+        z-index: 1500;
+
+        opacity: 0;
+        width: 0;
+        transition: all .8s cubic-bezier(1,-0.38,.19,1.29);
+        animation: pause 1s;
+    }
+
+    &_list {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        list-style: none;
+        text-align: center;
+        width: 100%;
+    }
+
+    &_item {
+        margin: 1rem;
+    }
+
+    &_link {
+        &:link,
+        &:visited {
+            display: inline-block;
+            font-size: 3rem;
+            font-weight: 300;
+            padding: 1rem 2rem;
+            color: $white;
+            text-decoration: none;
+            text-transform: uppercase;
+            background-image: linear-gradient(120deg, transparent 0%, transparent 50%, $white 50%);
+            background-size: 225%;
+            transition: all .5s;
+        }
+
+        &:hover,
+        &:active {
+            background-position: 100%;
+            color: $primary_color;
+            transform: translateX(-2rem);
+        }
+    }
+
+    //when checkbox is checked scale navigation_bkacground
+    &_checkbox:checked ~ &_background {
+        transform: scale(80);
+    }
+
+    &_checkbox:checked ~ &_nav {
+        opacity: 1;
+        width: 100%;
+        left: 0;
+    }
+
+    &_icon {
+        position: relative;
+        top: 3.4rem;
+
+        &,
+        &::before,
+        &::after {
+            width: 3rem;
+            height: 2px;
+            background-color: $dark_gray;
+            display: inline-block;
+            background-color: transparent;
+            transition: all .2s;
+        }
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            transition: all .5s;
+        }
+
+        &::before {top: -.7rem;}
+        &::after {top: .7rem;}
+    }
+
+    &_button:hover  &_icon::before {
+        top: -1rem;
+    }
+    &_button:hover  &_icon::after {
+        top: 1rem;
+    }
+
+    &_checkbox:checked + &_button &_icon {
+        background-color: transparent;
+    }
+    &_checkbox:checked + &_button &_icon::before {
+        top: 0;
+        background-color: $dark_gray;
+        transform: rotate(135deg);
+    }
+    &_checkbox:checked + &_button &_icon::after {
+        top: 0;
+        background-color: $dark_gray;
+        transform: rotate(-135deg);
+    }
+
+    &_text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1.4rem;
+        transition: opacity .5s;
+        color: $dark_gray;
+    }
+
+    &_checkbox:checked + &_button &_text {
+        opacity: 0;
+    }
+}

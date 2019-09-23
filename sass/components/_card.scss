@@ -1,0 +1,208 @@
+.card {
+
+    perspective: 150rem;
+    -moz-perspective: 150rem;
+    position: relative;
+    height: 54rem;
+
+    &_side {
+        height: 54rem;
+        transition: all .8s ease;
+        //when you take an element out of the flow of the page, the parent loses its height
+        //but unlike floats, absolute positioned items do not have any pure css way to fix.
+        //so the parent element has to have the same height as the child
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        backface-visibility: hidden;
+        border-radius: $card_radius;
+        //anytime image is breaking corner radius, overflow fixes it instead of defining the images corners
+        overflow: hidden;
+        box-shadow: 0 1.5rem 2rem rgba($black, .15);
+
+        &_front {
+            background-color: $white;
+        }
+
+        &_back {
+            transform: rotateY(-180deg);
+
+            &_1 {
+                background-image: linear-gradient(to right bottom, $light_yellow, $dark_yellow);
+            }
+            &_2 {
+                background-image: linear-gradient(to right bottom, $secondary_color, $tertiary_color);
+            }
+            &_3 {
+                background-image: linear-gradient(to right bottom, $light_blue, $dark_blue);
+            }
+        }
+    }
+
+    //while you are hovering on the card, select it's child and transform it
+    //if you JUST applied hover to the .card_side element, it would become jittery
+    //because as the element turns, your cursor leaves the element you're hovering
+    &:hover>&_side_front {
+        transform: rotateY(180deg);
+    }
+    &:hover>&_side_back {
+        transform: rotateY(0);
+    }
+
+    //front side styling
+    &_picture {
+        background-size: cover;
+        //picture will only show as much as the content that is in the container unless defined
+        height: 23rem;
+        background-blend-mode: screen;
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        border-radius: 6px 6px 0 0;
+
+        &_1 {
+            //we have to use the file path as if the css was already compiled
+            background-image: linear-gradient(to right bottom, $light_yellow, $dark_yellow),
+            url(../img/nat-5.jpg);
+        }
+        &_2 {
+            background-image: linear-gradient(to right bottom, $secondary_color, $tertiary_color),
+            url(../img/nat-6.jpg);
+        }
+        &_3 {
+            background-image: linear-gradient(to right bottom, $light_blue, $dark_blue),
+            url(../img/nat-7.jpg);
+        }
+    }
+
+    &_heading {
+        font-size: 2.8rem;
+        font-weight: 300;
+        text-align: right;
+        text-transform: uppercase;
+        color: $white;
+        position: absolute;
+        top: 12rem;
+        right: 2rem;
+        width: 75%;
+    }
+
+    &_heading_span {
+        padding: 1rem 1.5rem;
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
+
+        &_1 {
+            background-image: linear-gradient(to right bottom, 
+            rgba($light_yellow, .8), 
+            rgba($dark_yellow, .8));
+        }
+        &_2 {
+            background-image: linear-gradient(to right bottom, 
+            rgba($secondary_color, .8), 
+            rgba($tertiary_color, .8));
+        }
+        &_3 {
+            background-image: linear-gradient(to right bottom, 
+            rgba($light_blue, .8), 
+            rgba($dark_blue, .8));
+        }
+    }
+
+    &_details {
+        padding: 3rem;
+
+        ul {
+            list-style: none;
+            width: 80%;
+            margin: 0 auto;
+
+            li {
+                text-align: center;
+                font-size: 1.5rem;
+                padding: 1rem;
+                
+                &:not(:last-child){
+                    border-bottom: 1px solid $lighter_gray;
+                }
+            }
+        }
+    }
+
+    &_cta {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        text-align: center;
+    }
+
+    &_price_box {
+        text-align: center;
+        color: $white;
+        margin-bottom: 8rem;
+
+        &_only {
+            font-size: 2rem;
+            text-transform: uppercase;
+        }
+    
+        &_value {
+            font-size: 6rem;
+        }
+    }
+
+
+
+    //MEDIA WITH 900PX
+    @include respond(tablet_portrait) {
+
+        height: auto;
+        border-radius: $card_radius;
+        background-color: $white;
+        box-shadow: 0 1.5rem 2rem rgba($black, .15);
+
+        &_side {
+            height: auto;
+            transition: all .8s ease;
+            //when you take an element out of the flow of the page, the parent loses its height
+            //but unlike floats, absolute positioned items do not have any pure css way to fix.
+            //so the parent element has to have the same height as the child
+            position: relative;
+            box-shadow: none;
+
+            &_back {
+                transform: rotateY(0deg);
+                -webkit-clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+                clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+                border-radius: 0 0 $card_radius $card_radius;
+            }
+        }
+        
+        &:hover>&_side_front {
+            transform: rotateY(0);
+        }
+
+        &_details {
+            padding: 1rem 3rem;
+        }
+
+        &_cta {
+            position: relative;
+            top: 0%;
+            left: 0%;
+            transform: translate(0);
+            width: 100%;
+            padding: 7rem 4rem 4rem 4rem;
+        }
+
+        &_price_box {
+            margin-bottom: 1rem;
+        
+            &_value {
+                font-size: 5rem;
+            }
+        }
+    }
+}

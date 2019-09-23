@@ -1,0 +1,118 @@
+.popup {
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba($black, .8);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .3s;
+
+    &_content {
+
+        @include absolute_center;
+        width: 78%;
+        background-color: $white;
+        box-shadow: 0 2rem 4rem rgba($black, .2);
+        border-radius: $card_radius;
+        display: table;
+        overflow: hidden;
+        //opacity: 0;
+        transform: translate(-50%, -50%) scale(.1);
+        transition: all .5s .2s;
+
+        @include respond(tablet_landscape){
+            display: flex;
+            flex-flow: column-reverse;
+        }
+    }
+
+    &_left {
+        width: 40%;
+        display: table-cell;
+        vertical-align: middle;
+
+        @include respond(tablet_landscape){
+            width: 50%;
+            display: flex;
+            vertical-align: none;
+        }
+
+        @include respond(tablet_portrait){
+            display: none;
+        }
+    }
+
+    &_right {
+        width: 60%;
+        display: table-cell;
+        vertical-align: middle;
+        padding: 1rem 4rem;
+
+        @include respond(tablet_landscape){
+            width: 100%;
+            display: inline-block;
+            vertical-align: none;
+            padding: 4rem;
+        }
+
+    }
+
+    &_image {
+        display: block;
+        width: 100%;
+    }
+
+    &_text {
+        font-size: 1.4rem;
+        margin-bottom: 2rem;
+
+        -moz-column-count: 2;
+        -moz-column-gap: 4rem;
+        -moz-column-rule: 1px solid $gray;
+
+        column-count: 2;
+        column-gap: 4rem;
+        column-rule: 1px solid $gray;
+
+        -moz-hyphens: auto;
+        -ms-hyphens: auto;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+
+        @include respond(phone){
+            -moz-column-count: 1;
+            column-count: 1;
+        }
+    }
+
+    &:target {
+        opacity: 1;
+        visibility: visible;
+     }
+
+     &:target &_content {
+        transform: translate(-50%, -50%) scale(1);
+     }
+ 
+     &_close {
+         &:link,
+         &:visited {
+             color: $dark_gray;
+             position: absolute;
+             right: 2.5rem;
+             top: 0;
+             text-decoration: none;
+             display: inline-block;
+             font-size: 5rem;
+             border-radius: 50%;
+             transition: all .4s .2s;
+         }
+ 
+         &:hover {
+             color: $primary_color;
+         }
+     }
+}

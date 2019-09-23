@@ -1,7 +1,9 @@
 .button {
+    transition: all .3s;
     /*pseudo classes are a special state of a selector*/
     /*we want the link/button to have same design as 
     when the link has been visited*/
+    &,
     &:link,
     &:visited {
         text-transform: uppercase;
@@ -10,13 +12,17 @@
         display: inline-block;
         border-radius: 100px;
         position: relative;
-        box-shadow: 0 .1rem .3rem rgba($black,0.12), 0 .1rem .2rem  rgba($black,0.24);
+        box-shadow: 0 .1rem .3rem rgba($black,0.12), 0 .1rem .2rem  rgba($black,0.2);
         font-size: 1.6rem;
+
+        //change for the <button> element
+        border: none;
+        cursor: pointer;
     }
     &:hover {
         transform: translateY(-.3rem);
         box-shadow: 0 1rem 2rem; /*first argument is X offset, second is Y offset, third is blur*/
-        box-shadow: 0 .2rem 1rem rgba($black, 0.404), 0 .1rem .2rem rgba($black,0.24);
+        box-shadow: 0 .2rem 1rem rgba($black, 0.15), 0 .1rem .5rem rgba($black,0.1);
 
         &::after {
             transform: scaleY(1.4) scaleX(1.6);
@@ -24,7 +30,9 @@
         }
     }
     /*when clicked on*/
-    &:active {
+    &:active,
+    &:focus {
+        outline: none;
         transform: translateY(-.1rem);
         box-shadow: 0 1px 3px rgba($black,0.12), 0 1px 2px rgba($black,0.24);
     }
@@ -36,6 +44,16 @@
             background-color: $white;
         }
     }
+
+    &_green {
+        background-color: $primary_color;
+        color: $white;
+
+        &::after {
+            background-color: $primary_color;
+        }
+    }
+
     &::after {
         content: "";
         display: inline-block;
