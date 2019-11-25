@@ -1,2 +1,2 @@
 # Nature-Adventures
- First time using SASS/SCSS on a site
+Use of SASS/SCSS only
